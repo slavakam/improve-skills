@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "nodemon",
-    "start": "node index.js",
+    "start": "node src/index.js",
     "test": "echo \"Success\""
   }
 }

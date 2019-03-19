@@ -1,5 +1,13 @@
 version: '3'
 services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    # restart: always
+    # command: mongod --noauth --smallfiles
+    ports:
+      - "27017:27017"
+    networks:
+      - webappnetwork
   api:
     build:
       dockerfile: Dockerfile.dev
@@ -8,6 +16,8 @@ services:
       - "3001:5000"
     volumes:
       - ./server:/app
+    networks:
+      - webappnetwork
   client:
     build:
       dockerfile: Dockerfile.dev
@@ -16,3 +26,7 @@ services:
       - ./client:/app
     ports:
       - "3000:3000"
+
+networks:
+  webappnetwork:
+    driver: bridge
