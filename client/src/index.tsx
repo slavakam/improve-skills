@@ -5,6 +5,8 @@ import './styles/index.less';
 
 import { App } from './containers/App';
 
+console.log('hello');
+
 ReactDOM.render(
   <App name="Unknown" />,
   document.querySelector('#app'),
