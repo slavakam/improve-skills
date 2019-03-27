@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors'); 
 const mongoose = require('mongoose');
+
+const router = require('./router');
 const config = require('./db');
 
 mongoose.Promise = Promise;
@@ -9,17 +11,11 @@ mongoose.Promise = Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true });
 
 const app = express();
+
 app.use(bodyParser.json());
 app.use(cors());
+router(app);
 
-app.get('/', (req, res) => {
-  res.send('Hi');
-});
-
-app.get('/user', (req, res) => {
-  res.json({ name: 'Slava', age: 24 });
-});
-
-app.listen(5000, err => {
-  console.log('Listening');
+app.listen(3001, err => {
+  console.log('Server is running on port: 5000');
 });

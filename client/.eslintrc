@@ -17,7 +17,7 @@
     "browser": true,
     "es6": true
   },
-  "plugins" : ["redux-saga"],
+  // "plugins" : ["redux-saga"],
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
@@ -60,14 +60,18 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/label-has-associated-control": "off",
+    "no-useless-rename": "off",
 
-    "redux-saga/no-yield-in-race": "error",
-    "redux-saga/yield-effects": "error",
+    // "redux-saga/no-yield-in-race": "error",
+    // "redux-saga/yield-effects": "error",
 
     "indent": "off",
     "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/explicit-member-accessibility": "off",
 
     // TODO: wait new release of eslint-plugin-import
-    "import/named": "off"
+    "import/named": "off",
+
+    "no-undef": "off"
   }
 }
