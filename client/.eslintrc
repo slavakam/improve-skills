@@ -72,6 +72,7 @@
     // TODO: wait new release of eslint-plugin-import
     "import/named": "off",
 
-    "no-undef": "off"
+    "no-undef": "off",
+    "implicit-arrow-linebreak": "off"
   }
 }

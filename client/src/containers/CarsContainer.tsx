@@ -5,38 +5,29 @@ import { connect } from 'react-redux';
 import { CreateNewCarDialog } from '../components/CreateNewCarDialog';
 import { CarsTable } from '../components/CarsTable';
 
-import { AppState } from '../reducers';
-import { selectors } from '../reducers/cars/reducer';
-import { Car } from '../interfaces';
+import { AppState } from '../store';
+import { selectors } from '../store/cars/reducer';
+import { openCreateCardDialogAction } from '../store/cars/actions';
+import { Car } from '../store/cars/types';
 
-interface CarsContainerState { cars: Car[]; isCreateCarDialogVisible: boolean }
-interface CarsContainerProps { cars: Car[] }
+interface CarsContainerProps {
+  cars: Car[];
+  isCreateCarDialogVisible: boolean;
+  openCreateCardDialog: ;
+}
 
-class CarsContainerComponent extends React.Component<CarsContainerProps, CarsContainerState> {
-  constructor(props: CarsContainerProps) {
-    super(props);
-
-    this.state = {
-      cars: props.cars,
-      isCreateCarDialogVisible: false,
-    };
-  }
-
-  onCreateNewCarClick = (): void => {
-    this.setState({ isCreateCarDialogVisible: true });
-  }
-
-  onCloseCreateNewCarDialog = (): void => {
-    this.setState({ isCreateCarDialogVisible: false });
+class CarsContainerComponent extends React.Component<CarsContainerProps, null> {
+  componentDidMount() {
+    console.log('hello');
   }
 
   render() {
-    const { cars, isCreateCarDialogVisible } = this.state;
+    const { cars, isCreateCarDialogVisible } = this.props;
     return (
       <Container>
         <Row>
           <Col md={12}>
-            <Button onClick={this.onCreateNewCarClick} variant="outline-primary">Create new car</Button>
+            <Button onClick={() => console.log('hello')} variant="outline-primary">Create new car</Button>
           </Col>
         </Row>
         {cars.length > 0 && (
@@ -44,7 +35,7 @@ class CarsContainerComponent extends React.Component<CarsContainerProps, CarsCon
         )}
         {isCreateCarDialogVisible && (
           <CreateNewCarDialog
-            onCloseCreateNewCarDialog={this.onCloseCreateNewCarDialog}
+            onCloseCreateNewCarDialog={() => console.log('hello')}
             show={isCreateCarDialogVisible}
           />
         )}
@@ -55,4 +46,7 @@ class CarsContainerComponent extends React.Component<CarsContainerProps, CarsCon
 
 export const CarsContainer = connect((state: AppState) => ({
   cars: selectors.carsSelector(state),
-}))(CarsContainerComponent);
+  isCreateCarDialogVisible: selectors.isCreateCarDialogVisibleSelector(state),
+}), {
+  openCreateCardDialog: openCreateCardDialogAction,
+})(CarsContainerComponent);
