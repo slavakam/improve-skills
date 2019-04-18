@@ -6,28 +6,36 @@ import { CreateNewCarDialog } from '../components/CreateNewCarDialog';
 import { CarsTable } from '../components/CarsTable';
 
 import { AppState } from '../store';
-import { selectors } from '../store/cars/reducer';
-import { openCreateCardDialogAction } from '../store/cars/actions';
-import { Car } from '../store/cars/types';
+import { selectors } from '../reducers/cars';
+import { openCreateCardDialogAction, closeCreateCardDialogAction } from '../actions/cars';
+import { fetchCarsThunk } from '../thunks/cars';
+import { Car } from '../types/cars';
 
 interface CarsContainerProps {
   cars: Car[];
   isCreateCarDialogVisible: boolean;
-  openCreateCardDialog: ;
+  openCreateCardDialog: () => void;
+  closeCreateCardDialog: () => void;
+  fetchCars: () => void;
 }
 
 class CarsContainerComponent extends React.Component<CarsContainerProps, null> {
   componentDidMount() {
-    console.log('hello');
+    this.props.fetchCars();
   }
 
   render() {
-    const { cars, isCreateCarDialogVisible } = this.props;
+    const {
+      cars,
+      isCreateCarDialogVisible,
+      openCreateCardDialog,
+      closeCreateCardDialog,
+    } = this.props;
     return (
       <Container>
         <Row>
           <Col md={12}>
-            <Button onClick={() => console.log('hello')} variant="outline-primary">Create new car</Button>
+            <Button onClick={openCreateCardDialog} variant="outline-primary">Create new car</Button>
           </Col>
         </Row>
         {cars.length > 0 && (
@@ -35,7 +43,7 @@ class CarsContainerComponent extends React.Component<CarsContainerProps, null> {
         )}
         {isCreateCarDialogVisible && (
           <CreateNewCarDialog
-            onCloseCreateNewCarDialog={() => console.log('hello')}
+            onCloseCreateNewCarDialog={closeCreateCardDialog}
             show={isCreateCarDialogVisible}
           />
         )}
@@ -49,4 +57,6 @@ export const CarsContainer = connect((state: AppState) => ({
   isCreateCarDialogVisible: selectors.isCreateCarDialogVisibleSelector(state),
 }), {
   openCreateCardDialog: openCreateCardDialogAction,
+  closeCreateCardDialog: closeCreateCardDialogAction,
+  fetchCars: fetchCarsThunk,
 })(CarsContainerComponent);

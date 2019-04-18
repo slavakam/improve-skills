@@ -1,15 +1,12 @@
 import * as React from 'react';
 import { Table, Button } from 'react-bootstrap';
+import { Car } from '../types/cars';
 
-interface Car {
-  _id: string;
-  make: string;
-  model: string;
-  mileage: string;
-  price: string;
+interface CarsTableProps {
+  cars: Car[];
 }
 
-export const CarsTable = ({ cars }: { cars: Car[] }): JSX.Element => {
+export const CarsTable: React.SFC<CarsTableProps> = ({ cars }: CarsTableProps) => {
   return (
     <Table striped bordered hover>
       <thead>

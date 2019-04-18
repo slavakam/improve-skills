@@ -1,10 +1,11 @@
-import { createStore as createReduxStore, compose, combineReducers } from 'redux';
+import {
+  createStore as createReduxStore,
+  compose,
+  applyMiddleware,
+} from 'redux';
+import thunk from 'redux-thunk';
 
-import { reducer as carsReducer } from './cars/reducer';
-
-const rootReducer = combineReducers({
-  cars: carsReducer,
-});
+import { rootReducer } from '../reducers';
 
 declare global {
   interface Window {
@@ -22,7 +23,7 @@ export const createStore = () => {
 
   const store = createReduxStore(
     rootReducer,
-    composeEnhancers(),
+    composeEnhancers(applyMiddleware(thunk)),
   );
 
   return store;

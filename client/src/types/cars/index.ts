@@ -7,11 +7,12 @@ export interface Car {
 }
 
 export interface CarsState {
-  cars: Car[];
+  cars: Car[] | null;
   isCreateCarDialogVisible: boolean;
 }
 
 export const CARS_OPEN_CREATE_CAR_DIALOG = 'CARS_OPEN_CREATE_CAR_DIALOG';
+export const CARS_CLOSE_CREATE_CAR_DIALOG = 'CARS_CLOSE_CREATE_CAR_DIALOG';
 
 export const CARS_FETCH_CARS = 'CARS_FETCH_CARS';
 export const CARS_FETCH_CARS_SUCCESS = 'CARS_FETCH_CARS_SUCCESS';
@@ -25,16 +26,21 @@ interface CarsOpenCreateCarDialogAction {
   type: typeof CARS_OPEN_CREATE_CAR_DIALOG;
 }
 
+interface CarsCloseCreateCarDialogAction {
+  type: typeof CARS_CLOSE_CREATE_CAR_DIALOG;
+}
 interface CarsFetchCarsAction {
   type: typeof CARS_FETCH_CARS;
 }
 
 interface CarsFetchCarsSuccessAction {
   type: typeof CARS_FETCH_CARS_SUCCESS;
+  cars: Car[];
 }
 
 interface CarsFetchCarsFailAction {
   type: typeof CARS_FETCH_CARS_FAIL;
+  err: Error;
 }
 
 interface CarsCreateCarAction {
@@ -50,6 +56,7 @@ interface CarsCreateCarFailAction {
 }
 
 export type CarsActionType = CarsOpenCreateCarDialogAction |
+CarsCloseCreateCarDialogAction |
 CarsFetchCarsAction |
 CarsFetchCarsSuccessAction |
 CarsFetchCarsFailAction |
