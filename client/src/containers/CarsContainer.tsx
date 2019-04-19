@@ -2,21 +2,20 @@ import * as React from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { CreateNewCarDialog } from '../components/CreateNewCarDialog';
+import { CreateCarDialogContainer } from './CreateCarDialogContainer';
 import { CarsTable } from '../components/CarsTable';
 
 import { AppState } from '../store';
 import { selectors } from '../reducers/cars';
-import { openCreateCardDialogAction, closeCreateCardDialogAction } from '../actions/cars';
-import { fetchCarsThunk } from '../thunks/cars';
+import { openCreateCardDialogAction } from '../actions/cars';
+import { fetchCarsThunk, deleteCarThunk } from '../thunks/cars';
 import { Car } from '../types/cars';
 
 interface CarsContainerProps {
   cars: Car[];
-  isCreateCarDialogVisible: boolean;
   openCreateCardDialog: () => void;
-  closeCreateCardDialog: () => void;
   fetchCars: () => void;
+  deleteCar: (carId: string) => void;
 }
 
 class CarsContainerComponent extends React.Component<CarsContainerProps, null> {
@@ -27,9 +26,8 @@ class CarsContainerComponent extends React.Component<CarsContainerProps, null> {
   render() {
     const {
       cars,
-      isCreateCarDialogVisible,
       openCreateCardDialog,
-      closeCreateCardDialog,
+      deleteCar,
     } = this.props;
     return (
       <Container>
@@ -39,14 +37,9 @@ class CarsContainerComponent extends React.Component<CarsContainerProps, null> {
           </Col>
         </Row>
         {cars.length > 0 && (
-          <CarsTable cars={cars} />
+          <CarsTable cars={cars} deleteCar={deleteCar} />
         )}
-        {isCreateCarDialogVisible && (
-          <CreateNewCarDialog
-            onCloseCreateNewCarDialog={closeCreateCardDialog}
-            show={isCreateCarDialogVisible}
-          />
-        )}
+        <CreateCarDialogContainer />
       </Container>
     );
   }
@@ -54,9 +47,8 @@ class CarsContainerComponent extends React.Component<CarsContainerProps, null> {
 
 export const CarsContainer = connect((state: AppState) => ({
   cars: selectors.carsSelector(state),
-  isCreateCarDialogVisible: selectors.isCreateCarDialogVisibleSelector(state),
 }), {
   openCreateCardDialog: openCreateCardDialogAction,
-  closeCreateCardDialog: closeCreateCardDialogAction,
   fetchCars: fetchCarsThunk,
+  deleteCar: deleteCarThunk,
 })(CarsContainerComponent);

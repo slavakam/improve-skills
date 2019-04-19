@@ -1,12 +1,15 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { Table, Button } from 'react-bootstrap';
+
 import { Car } from '../types/cars';
 
 interface CarsTableProps {
   cars: Car[];
+  deleteCar: (cardId: string) => void;
 }
 
-export const CarsTable: React.SFC<CarsTableProps> = ({ cars }: CarsTableProps) => {
+export const CarsTable: React.SFC<CarsTableProps> = ({ cars, deleteCar }) => {
   return (
     <Table striped bordered hover>
       <thead>
@@ -28,12 +31,17 @@ export const CarsTable: React.SFC<CarsTableProps> = ({ cars }: CarsTableProps) =
             <td>{car.mileage}</td>
             <td>{car.price}</td>
             <td>
-              <Button variant="link">Edit</Button>
-              <Button variant="danger">Delete</Button>
+              <Button size="sm" variant="link">Edit</Button>
+              <Button onClick={() => deleteCar(car._id)} size="sm" variant="danger">Delete</Button>
             </td>
           </tr>
         ))}
       </tbody>
     </Table>
   );
+};
+
+CarsTable.propTypes = {
+  cars: PropTypes.array.isRequired,
+  deleteCar: PropTypes.func.isRequired,
 };
