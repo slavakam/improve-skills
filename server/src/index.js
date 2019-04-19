@@ -4,11 +4,13 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const router = require('./router');
-const config = require('./db');
 
 mongoose.Promise = Promise;
 
-mongoose.connect(config.DB, { useNewUrlParser: true });
+mongoose.connect(
+  'mongodb://car:password1@ds055742.mlab.com:55742/improve',
+  { useNewUrlParser: true }
+);
 
 const app = express();
 
