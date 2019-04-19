@@ -11,14 +11,8 @@ exports.create = (req, res, next) => {
 
   car.save((err, car) => {
     if (err) return next(err);
-    console.log(car);
-    res.json({
-      _id: car._id,
-      make,
-      model,
-      mileage,
-      price,
-    });
+
+    res.json(car);
   });
 };
 
@@ -43,9 +37,9 @@ exports.delete = (req, res) => {
 exports.update = (req, res) => {
   const { id } = req.params;
 
-  Car.updateOne({ _id: id }, (err) => {
+  Car.findOneAndUpdate({ _id: id }, req.body, (err, car) => {
     if (err) return next(err);
 
-    res.send();
+    res.json(car);
   })
 };

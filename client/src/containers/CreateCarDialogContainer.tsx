@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { CreateNewCarDialog } from '../components/CreateNewCarDialog';
+import { CreateCarDialog } from '../components/CreateCarDialog';
 
-import { AppState } from '../store';
-import { selectors } from '../reducers/cars';
 import { closeCreateCarDialogAction } from '../actions/cars';
 import { createCarThunk } from '../thunks/cars';
 
@@ -16,7 +14,6 @@ interface CreateCarDialogContainerState {
 }
 
 interface CreateCarDialogContainerProps {
-  isCreateCarDialogVisible: boolean;
   closeCreateCarDialog: () => void;
   createCar: (car: CreateCarDialogContainerState) => void;
 }
@@ -45,27 +42,16 @@ class CreateCarDialogContainerComponent extends React.Component
     }));
   }
 
-  onCloseDialog = (): void => {
-    this.setState({
-      make: '',
-      model: '',
-      mileage: '',
-      price: '',
-    });
+  onCreateCar = (): void => {
+    this.props.createCar(this.state);
     this.props.closeCreateCarDialog();
   }
 
-  onCreateCar = (): void => {
-    this.props.createCar(this.state);
-    this.onCloseDialog();
-  }
-
   render() {
-    const { isCreateCarDialogVisible } = this.props;
-    return isCreateCarDialogVisible && (
-      <CreateNewCarDialog
-        onClose={this.onCloseDialog}
-        show={isCreateCarDialogVisible}
+    return (
+      <CreateCarDialog
+        onClose={this.props.closeCreateCarDialog}
+        show
         onInputChange={this.onInputChange}
         onCreateCar={this.onCreateCar}
         {...this.state}
@@ -74,9 +60,7 @@ class CreateCarDialogContainerComponent extends React.Component
   }
 }
 
-export const CreateCarDialogContainer = connect((state: AppState) => ({
-  isCreateCarDialogVisible: selectors.isCreateCarDialogVisibleSelector(state),
-}), {
+export const CreateCarDialogContainer = connect(null, {
   closeCreateCarDialog: closeCreateCarDialogAction,
   createCar: createCarThunk,
 })(CreateCarDialogContainerComponent);

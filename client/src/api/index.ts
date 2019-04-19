@@ -7,5 +7,8 @@ export const fetchCars = (): Promise<AxiosResponse<Car[]>> =>
 export const createCar = (car: Car): Promise<AxiosResponse<Car>> =>
   axios.post('http://localhost:3001/cars', car);
 
+export const updateCar = (carId: string, car: Car): Promise<AxiosResponse<Car>> =>
+  axios.patch(`http://localhost:3001/cars/${carId}`, car);
+
 export const deleteCar = (carId: string): Promise<AxiosResponse<Car>> =>
   axios.delete(`http://localhost:3001/cars/${carId}`);

@@ -9,10 +9,15 @@ export interface Car {
 export interface CarsState {
   cars: Car[] | null;
   isCreateCarDialogVisible: boolean;
+  isEditCarDialogVisible: boolean;
+  selectedCarId: null | string;
 }
 
 export const CARS_OPEN_CREATE_CAR_DIALOG = 'CARS_OPEN_CREATE_CAR_DIALOG';
 export const CARS_CLOSE_CREATE_CAR_DIALOG = 'CARS_CLOSE_CREATE_CAR_DIALOG';
+
+export const CARS_OPEN_EDIT_CAR_DIALOG = 'CARS_OPEN_EDIT_CAR_DIALOG';
+export const CARS_CLOSE_EDIT_CAR_DIALOG = 'CARS_CLOSE_EDIT_CAR_DIALOG';
 
 export const CARS_FETCH_CARS = 'CARS_FETCH_CARS';
 export const CARS_FETCH_CARS_SUCCESS = 'CARS_FETCH_CARS_SUCCESS';
@@ -21,6 +26,10 @@ export const CARS_FETCH_CARS_FAIL = 'CARS_FETCH_CARS_FAIL';
 export const CARS_CREATE_CAR = 'CARS_CREATE_CAR';
 export const CARS_CREATE_CAR_SUCCESS = 'CARS_CREATE_CAR_SUCCESS';
 export const CARS_CREATE_CAR_FAIL = 'CARS_CREATE_CAR_FAIL';
+
+export const CARS_UPDATE_CAR = 'CARS_UPDATE_CAR';
+export const CARS_UPDATE_CAR_SUCCESS = 'CARS_UPDATE_CAR_SUCCESS';
+export const CARS_UPDATE_CAR_FAIL = 'CARS_UPDATE_CAR_FAIL';
 
 export const CARS_DELETE_CAR = 'CARS_DELETE_CAR';
 export const CARS_DELETE_CAR_SUCCESS = 'CARS_DELETE_CAR_SUCCESS';
@@ -33,6 +42,13 @@ interface CarsCloseCreateCarDialogAction {
   type: typeof CARS_CLOSE_CREATE_CAR_DIALOG;
 }
 
+interface CarsOpenEditCarDialogAction {
+  type: typeof CARS_OPEN_EDIT_CAR_DIALOG;
+  carId: string;
+}
+interface CarsCloseEditCarDialogAction {
+  type: typeof CARS_CLOSE_EDIT_CAR_DIALOG;
+}
 interface CarsFetchCarsAction {
   type: typeof CARS_FETCH_CARS;
 }
@@ -57,6 +73,18 @@ interface CarsCreateCarFailAction {
   err: Error;
 }
 
+interface CarsUpdateCarAction {
+  type: typeof CARS_UPDATE_CAR;
+}
+interface CarsUpdateCarSuccessAction {
+  type: typeof CARS_UPDATE_CAR_SUCCESS;
+  car: Car;
+}
+interface CarsUpdateCarFailAction {
+  type: typeof CARS_UPDATE_CAR_FAIL;
+  err: Error;
+}
+
 interface CarsDeleteCarAction {
   type: typeof CARS_DELETE_CAR;
 }
@@ -71,12 +99,17 @@ interface CarsDeleteCarFailAction {
 
 export type CarsActionType = CarsOpenCreateCarDialogAction |
 CarsCloseCreateCarDialogAction |
+CarsOpenEditCarDialogAction |
+CarsCloseEditCarDialogAction |
 CarsFetchCarsAction |
 CarsFetchCarsSuccessAction |
 CarsFetchCarsFailAction |
 CarsCreateCarAction |
 CarsCreateCarSuccessAction |
 CarsCreateCarFailAction |
+CarsUpdateCarAction |
+CarsUpdateCarSuccessAction |
+CarsUpdateCarFailAction |
 CarsDeleteCarAction |
 CarsDeleteCarSuccessAction |
 CarsDeleteCarFailAction;

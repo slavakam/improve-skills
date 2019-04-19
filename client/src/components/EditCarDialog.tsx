@@ -2,18 +2,18 @@ import * as React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import * as PropTypes from 'prop-types';
 
-interface CreateNewCarDialogProps {
+interface EditCarDialogProps {
   show: boolean;
   make: string;
   model: string;
   mileage: string;
   price: string;
-  onCreateCar: () => void;
+  onUpdateCar: () => void;
   onClose: (event?: React.MouseEvent) => void;
   onInputChange: (e: React.ChangeEvent) => void;
 }
 
-export const CreateNewCarDialog: React.SFC<CreateNewCarDialogProps> = ({
+export const EditCarDialog: React.SFC<EditCarDialogProps> = ({
   show,
   onClose,
   onInputChange,
@@ -21,12 +21,12 @@ export const CreateNewCarDialog: React.SFC<CreateNewCarDialogProps> = ({
   model,
   mileage,
   price,
-  onCreateCar,
+  onUpdateCar,
 }) => {
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Create new car</Modal.Title>
+        <Modal.Title>Update Car</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -75,19 +75,19 @@ export const CreateNewCarDialog: React.SFC<CreateNewCarDialogProps> = ({
         <Button variant="secondary" onClick={onClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={onCreateCar}>
-          Create Car
+        <Button variant="primary" onClick={onUpdateCar}>
+          Save
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-CreateNewCarDialog.propTypes = {
+EditCarDialog.propTypes = {
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
-  onCreateCar: PropTypes.func.isRequired,
+  onUpdateCar: PropTypes.func.isRequired,
   make: PropTypes.string.isRequired,
   model: PropTypes.string.isRequired,
   mileage: PropTypes.string.isRequired,

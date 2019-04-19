@@ -6,10 +6,15 @@ import { Car } from '../types/cars';
 
 interface CarsTableProps {
   cars: Car[];
-  deleteCar: (cardId: string) => void;
+  deleteCar: (carId: string) => void;
+  openEditCardDialog: (carId: string) => void;
 }
 
-export const CarsTable: React.SFC<CarsTableProps> = ({ cars, deleteCar }) => {
+export const CarsTable: React.SFC<CarsTableProps> = ({
+  cars,
+  deleteCar,
+  openEditCardDialog,
+}) => {
   return (
     <Table striped bordered hover>
       <thead>
@@ -31,7 +36,7 @@ export const CarsTable: React.SFC<CarsTableProps> = ({ cars, deleteCar }) => {
             <td>{car.mileage}</td>
             <td>{car.price}</td>
             <td>
-              <Button size="sm" variant="link">Edit</Button>
+              <Button onClick={() => openEditCardDialog(car._id)} size="sm" variant="link">Edit</Button>
               <Button onClick={() => deleteCar(car._id)} size="sm" variant="danger">Delete</Button>
             </td>
           </tr>
@@ -44,4 +49,5 @@ export const CarsTable: React.SFC<CarsTableProps> = ({ cars, deleteCar }) => {
 CarsTable.propTypes = {
   cars: PropTypes.array.isRequired,
   deleteCar: PropTypes.func.isRequired,
+  openEditCardDialog: PropTypes.func.isRequired,
 };
