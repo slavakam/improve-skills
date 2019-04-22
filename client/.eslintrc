@@ -17,7 +17,6 @@
     "browser": true,
     "es6": true
   },
-  // "plugins" : ["redux-saga"],
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
@@ -62,9 +61,6 @@
     "jsx-a11y/label-has-associated-control": "off",
     "no-useless-rename": "off",
 
-    // "redux-saga/no-yield-in-race": "error",
-    // "redux-saga/yield-effects": "error",
-
     "indent": "off",
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/explicit-member-accessibility": "off",
@@ -73,6 +69,8 @@
     "import/named": "off",
 
     "no-undef": "off",
-    "implicit-arrow-linebreak": "off"
+    "implicit-arrow-linebreak": "off",
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off"
   }
 }

@@ -1,14 +1,23 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
+import http from '../axios';
+
 import { Car } from '../types/cars';
+import { Auth } from '../types/auth';
 
 export const fetchCars = (): Promise<AxiosResponse<Car[]>> =>
-  axios.get('http://localhost:3001/cars');
+  http.get('/cars');
 
 export const createCar = (car: Car): Promise<AxiosResponse<Car>> =>
-  axios.post('http://localhost:3001/cars', car);
+  http.post('/cars', car);
 
 export const updateCar = (carId: string, car: Car): Promise<AxiosResponse<Car>> =>
-  axios.patch(`http://localhost:3001/cars/${carId}`, car);
+  http.patch(`/cars/${carId}`, car);
 
 export const deleteCar = (carId: string): Promise<AxiosResponse<Car>> =>
-  axios.delete(`http://localhost:3001/cars/${carId}`);
+  http.delete(`/cars/${carId}`);
+
+export const registration = (email: string, password: string): Promise<AxiosResponse<Auth>> =>
+  http.post('/signup', { email, password });
+
+export const login = (email: string, password: string): Promise<AxiosResponse<Auth>> =>
+  http.post('/signin', { email, password });

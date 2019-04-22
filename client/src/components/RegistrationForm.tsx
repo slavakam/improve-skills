@@ -6,12 +6,14 @@ interface RegistrationFormProps {
   email: string;
   password: string;
   onInputChange: (e: React.ChangeEvent) => void;
+  onSignupClick: () => void;
 }
 
 export const RegistrationForm: React.SFC<RegistrationFormProps> = ({
   email,
   password,
   onInputChange,
+  onSignupClick,
 }) => {
   return (
     <Form className="registration-form">
@@ -35,8 +37,12 @@ export const RegistrationForm: React.SFC<RegistrationFormProps> = ({
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Signup
+      <Button
+        variant="primary"
+        type="button"
+        onClick={onSignupClick}
+      >
+        Sign Up
       </Button>
     </Form>
   );
@@ -46,4 +52,5 @@ RegistrationForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   onInputChange: PropTypes.func.isRequired,
+  onSignupClick: PropTypes.func.isRequired,
 };

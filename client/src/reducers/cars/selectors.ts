@@ -11,7 +11,7 @@ export const isCreateCarDialogVisibleSelector = (state: AppState): boolean =>
 export const isEditCarDialogVisibleSelector = (state: AppState): boolean =>
   carsStateSelector(state).isEditCarDialogVisible;
 
-export const carByIdSelector = (state: AppState) => {
+export const carByIdSelector = (state: AppState): Car => {
   const cars = carsSelector(state);
   const selectedCarId = carsStateSelector(state).selectedCarId;
 

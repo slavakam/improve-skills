@@ -6,12 +6,14 @@ interface LoginFormProps {
   email: string;
   password: string;
   onInputChange: (e: React.ChangeEvent) => void;
+  onLoginClick: () => void;
 }
 
 export const LoginForm: React.SFC<LoginFormProps> = ({
   email,
   password,
   onInputChange,
+  onLoginClick,
 }) => {
   return (
     <Form className="login-form">
@@ -35,8 +37,12 @@ export const LoginForm: React.SFC<LoginFormProps> = ({
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Login
+      <Button
+        variant="primary"
+        type="button"
+        onClick={onLoginClick}
+      >
+        Log in
       </Button>
     </Form>
   );
@@ -46,4 +52,5 @@ LoginForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   onInputChange: PropTypes.func.isRequired,
+  onLoginClick: PropTypes.func.isRequired,
 };
