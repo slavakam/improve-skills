@@ -72,31 +72,6 @@ module.exports = () => {
             { loader: 'less-loader' },
           ],
         },
-        {
-          test: /\.less$/,
-          exclude: path.resolve(__dirname, '../src/styles'),
-          use: [
-            { loader: 'style-loader' },
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-                importLoaders: 1,
-                modules: true,
-                localIdentName: '[local]___[hash:base64:5]',
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: [autoprefixer({
-                  browsers: ['> 1%', 'last 2 versions'],
-                })],
-              },
-            },
-            { loader: 'less-loader' },
-          ],
-        },
       ],
     },
     plugins: [
