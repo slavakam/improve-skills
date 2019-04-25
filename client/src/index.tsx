@@ -8,6 +8,8 @@ import { Routers } from './router';
 
 import './styles/index.less';
 
+
+console.log('hello');
 ReactDOM.render(
   <Provider store={createStore()}>
     <Routers />

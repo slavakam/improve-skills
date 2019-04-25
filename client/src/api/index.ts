@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import http from '../axios';
+import http from '../../axios';
 
 import { Car } from '../types/cars';
 import { Auth } from '../types/auth';

@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 
-import http from '../../axios';
+import http from '../../../axios';
 
 import { AppState } from '../../store';
 import {

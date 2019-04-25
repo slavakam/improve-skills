@@ -11,7 +11,7 @@ import {
 
   AuthActionType,
 } from '../../types/auth';
-import http from '../../axios';
+import http from '../../../axios';
 
 export const loginUserAction = (): AuthActionType => ({
   type: AUTH_LOGIN_USER,

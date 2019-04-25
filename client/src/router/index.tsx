@@ -8,8 +8,6 @@ import { RegistrationContainer } from '../containers/RegistrationContainer';
 import { LoginContainer } from '../containers/LoginContainer';
 import { HeaderContainer } from '../containers/HeaderContainer';
 
-console.log('hello');
-
 export const Routers = (): JSX.Element => {
   return (
     <Router>
